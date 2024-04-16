@@ -4,32 +4,32 @@ Group 7
 Erkam Dogan, Luca Hesse, Tobias Krumrein
 '''
 def donuts(count):
-    if not isinstance(count, int):              # Error handling when not an int
+    if not isinstance(count, int):              # Error handling when the input is not an int
         return "Error! You need an int as input for that function."
-    if count < 10:                              # if count is less than 10 use count 
+    if count < 10:                              # if the count value is less than 10, return count 
         return f'Number of donuts: {count}'
-    return f'Number of donuts: many'            # else the count is 10 or more, then use the word 'many'
+    return f'Number of donuts: many'            # else return the word 'many'
 
 def verbing(s):
-    if not isinstance(s, str):                  # Error handling when not a string
+    if not isinstance(s, str):                  # Error handling when the input is not a string
         return "Error! It's not a string!"
-    if len(s) < 3:                              # if string length is less than three return only the string
+    if len(s) < 3:                              # if the length of s is less than three, return the string
         return s
-    if s.endswith('ing'):                       # if string ends with 'ing', add 'ly'
+    if s.endswith('ing'):                       # if s ends with 'ing', add 'ly'
         return f'{s}ly'
-    return f'{s}ing'                            # else add 'ing' to string
+    return f'{s}ing'                            # else add 'ing' to s
 
 def remove_adjacent(nums):
-    if not (nums, list):                        # Error handling when not a list
+    if not (nums, list):                        # Error handling when the input is not a list
         return 'Error! Not a list'
-    final_list = []                             # create new list
+    final_list = []                             # create output list
 
     for num in nums:                            # iterate through the instances in nums
-        if not isinstance(num, int) and not isinstance(num, float): # Error handling, when something else when a number is in the list
+        if not isinstance(num, int) and not isinstance(num, float): # Error handling, when something else than a number is in the list
             return "Error! List contains instances, which are not numbers (int or float)."
-        if not num in final_list:               # when number is not in the new list, add it to the list
+        if not num in final_list:               # when the number is not in the input list, add it to the output list
             final_list.append(num)
-    return final_list                           # return the final list
+    return final_list                           # return the output list
 
 
 def main():
