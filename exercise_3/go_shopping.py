@@ -3,11 +3,11 @@ Exercise 2
 Group 7
 Erkam Dogan, Luca Hesse, Tobias Krumrein
 '''
-from easy_shopping import calculator, shopping
+from easy_shopping import calculator, shopping              # import calculator and shopping from easy_shopping package
 
-def main():
+def main():                                                 # main method to run test cases
 
-    calc = calculator.Calculator()
+    calc = calculator.Calculator()                          # make a instanz of calculator class
     
     
     print(calc.addition(7, 5))
@@ -16,7 +16,7 @@ def main():
     print(calc.division(144, 2))
     print(calc.division(45, 0))
 
-    shoppingCart = shopping.Shoppingcart()
+    shoppingCart = shopping.Shoppingcart()                  # make an instance of shoppingcart class
 
     shoppingCart.addItem(shopping.Item("Proteinpulver", 3))
     shoppingCart.addItem(shopping.Item("Magerquark", 2))
