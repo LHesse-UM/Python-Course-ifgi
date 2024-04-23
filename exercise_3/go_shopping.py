@@ -3,13 +3,11 @@ Exercise 2
 Group 7
 Erkam Dogan, Luca Hesse, Tobias Krumrein
 '''
-from  exercise_3.easy_shopping.calculator import Calculator
-from exercise_3.easy_shopping.shopping import Shoppingcart, Item
 from easy_shopping import calculator, shopping
 
 def main():
 
-    calc = Calculator()
+    calc = calculator.Calculator()
     
     
     print(calc.addition(7, 5))
@@ -18,11 +16,11 @@ def main():
     print(calc.division(144, 2))
     print(calc.division(45, 0))
 
-    shoppingCart = Shoppingcart()
+    shoppingCart = shopping.Shoppingcart()
 
-    shoppingCart.addItem(Item("Proteinpulver", 3))
-    shoppingCart.addItem(Item("Magerquark", 2))
-    shoppingCart.addItem(Item("Kultidöner", 5))
+    shoppingCart.addItem(shopping.Item("Proteinpulver", 3))
+    shoppingCart.addItem(shopping.Item("Magerquark", 2))
+    shoppingCart.addItem(shopping.Item("Kultidöner", 5))
     shoppingCart.displayItems()
     shoppingCart.removeItem("Kultidöner")
     shoppingCart.displayItems()
