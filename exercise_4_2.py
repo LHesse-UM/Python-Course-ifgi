@@ -21,7 +21,7 @@ with open(path + 'SchoolReport.csv', 'w') as file:
     # headers
     writer.writerow(['Name','X','Y'])
 
-    # iterate through alle features in featuresML
+    # iterate through all features in featuresML
     for feature in featuresML:
 
         # write name and coordinates into csv
