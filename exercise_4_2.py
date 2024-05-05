@@ -1,25 +1,33 @@
+# import modules
 import csv
 
+# Get a reference to the map canvas in QGIS
 mc = iface.mapCanvas()
 
-ml = mc.currentLayer()
+# Get the currently selected layer from the map canvas
+ml = mc.currentLayer() 
 
+# Get the currently selected features from ml
 featuresML = ml.selectedFeatures()
 
 
-# Pfad anpassen!
+# adjust path to your desired csv destination here!
 path = 'C:/Users/lucah/OneDrive/Desktop/'
+
+# create csv
 with open(path + 'SchoolReport.csv', 'w') as file:
     writer = csv.writer(file, delimiter=';')
-    
+
+    # headers
     writer.writerow(['Name','X','Y'])
     
     for feature in featuresML:
 
+        # write name and coordinates into csv
         schoolNameAtt = feature.attributes()[1]
         geometry = feature.geometry()
         x, y = geometry.asPoint()
         writer.writerow([schoolNameAtt,x,y])
 
     
-    print('Fertig')
+    print('Done!')
