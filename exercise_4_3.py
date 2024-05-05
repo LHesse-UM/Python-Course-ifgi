@@ -28,6 +28,7 @@ for file in directory:
         # create vector layer
         layer = QgsVectorLayer(layer_path + '/' + file, file[:-4], "ogr")
 
+        # error handling
         if not layer.isValid():
             print("Error loading the layer!")
             
