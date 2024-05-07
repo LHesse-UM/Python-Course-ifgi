@@ -57,6 +57,6 @@ for district in districts_layer.getFeatures():
 if message == "":
 
     # create output message and inform the user
-    message = "Input Point was not in any district of Münster"
+    message = "Input coordinate did not match with any district in Münster"
     QMessageBox.information(parent, "Checking Point", message)
 
