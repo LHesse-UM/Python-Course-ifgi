@@ -1,34 +1,62 @@
-districts_layer = QgsProject.instance().mapLayersByName('Muenster_City_Districts')[0]
+# retreive main window to create sub windows later on
 parent = iface.mainWindow()
-source_crs = QgsCoordinateReferenceSystem("EPSG:4326")
-mod_crs = districts_layer.crs() # EPSG:25832
 
+# save city district layer
+districts_layer = QgsProject.instance().mapLayersByName('Muenster_City_Districts')[0]
+
+# create source crs
+source_crs = QgsCoordinateReferenceSystem("EPSG:4326")
+
+# create output crs (in this case ETRS89 32N)
+mod_crs = districts_layer.crs() 
+
+
+# create class with created crs's
 transformation = QgsCoordinateTransform(source_crs, mod_crs, QgsProject.instance())
-print(mod_crs)
+
+# save dialog input as well as boolean value whether 'ok' was clicked or not 
 sCoords, bOK = QInputDialog.getText(parent, "Coordinates", "Enter coordinates as latitude, longitude", text = "51.96066,7.62476")
 
+# action canceled
 if not bOK:
-    QMessageBox.warning(parent, "FAILED", "huh")
 
-# get the splitted values
-lat, lon = map(float, sCoords.split(',')) # float verlangt
+    # create output and inform the user
+    message = "canceled action"
+    QMessageBox.warning(parent, "canceled", message)
 
+
+# get the splitted values and transform them to floats
+lat, lon = map(float, sCoords.split(',')) 
+
+# create Point from input coordinates
 inputPoint = QgsPointXY(lon, lat)
+
+# transform point to ETRS89 32N (might be different if other layer is used)
 inputPointT = transformation.transform(inputPoint)
-print(inputPointT)
 
-districtLayers = QgsProject.instance().mapLayersByName("Muenster_City_Districts")
-districtLayer = districtLayers[0]
+# create message, which will be used for the output
+message = ""
 
-check = False
-for district in districtLayer.getFeatures():
+# iterate through all districts
+for district in districts_layer.getFeatures():
+
+    # get districts geometry
     districtGeometry = district.geometry()
-    
+
+    # check whether the transformed point is within the district
     if districtGeometry.contains(inputPointT):
-        QMessageBox.information(parent, "Checking Point", f"Input Point is in {district['Name']}")
-        check = True
+
+        # create output and inform the user
+        message = f"Input Point is in {district['Name']}"
+        QMessageBox.information(parent, "Checking Point", message)
+
+        # jump out of the loop
         break
-    
-if check == False:
-    QMessageBox.information(parent, "Checking Point", "Input Point was not in any district of Münster")
+
+# if the string is empty, no matching district was found
+if message == "":
+
+    # create output message and inform the user
+    message = "Input Point was not in any district of Münster"
+    QMessageBox.information(parent, "Checking Point", message)
 
